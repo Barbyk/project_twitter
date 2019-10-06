@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+    div(class="d-flex flex-row content justify-content-center mx-auto")
+            form(class="card w-50 mt-5" method="post" action="/auth/signin")
+                div(class="card-header") Connection
+                    div(class="card-body")
+                        div(class="form-group")
+                            label Email
+                            input(class="form-control" type="text" name="email")
+                        div(class="form-group")
+                            label Password
+                            input(class="form-control" type="text" name="password")
+                        //- affichage des errors si on en a
+                        if errors 
+                            ul(class="my-2")
+                                each error in errors
+                                    li(class="text-danger")=error
+                        div(class="w-100")
+                            input(type="submit" value="Connection" class='btn btn-primary ml-auto d-block')
