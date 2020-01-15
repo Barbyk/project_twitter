@@ -13,6 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let searchInput = document.querySelector('#search-input');
     let ref;
+    
     searchInput.addEventListener('input', (e) => {
         const value = e.target.value;
         if (ref) { //si il ya une recherche en cours, clearle time ou ne prend en compte que la dernière recherche

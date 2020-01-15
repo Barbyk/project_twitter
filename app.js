@@ -1,14 +1,16 @@
+require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');// module native nodejs
 const index = require('./routes');
 const errorHandler = require('errorhandler');
+const env = require(`./environment/${ process.env.NODE_ENV }`)  // ne fonctionne pas process.env.NODE_ENV undefined
 require('./database/index');
 
 
 const app = express();
-exports.app = app;
-const port = process.env.PORT || 3000; //si process.env.PORT is undefined, port = 3000
+module.exports = app;
+
 
 app.set('views', path.join(__dirname, 'views'));//express va chercher le dossier views lorsqu'une vue lui sera demandée par la méthode render(), __dirname dispo grâce au module wrapper de nodejs
 app.set('view engine', 'pug');// pug pour template engine, utilisé pour nos vues lorsqu'on fera res.render()
@@ -43,4 +45,7 @@ if (process.env.NODE_env === "development") {
     })
 }
 
-app.listen(port);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log("listen " + port );
+});

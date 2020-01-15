@@ -1,0 +1,21 @@
+require('dotenv').config();
+const fs = require('fs');
+const https = require('https');
+const http = require('http');
+const app = require('../app');
+const path = require('path');
+// const env = require(path.join(__dirname, '../environment'))
+
+
+
+// const port = process.env.PORT || 3000; //si process.env.PORT is undefined, port = 3000
+
+const httpServer = http.createServer((req, res) => {
+    res.writeHead(301, { Location: `https://${ req.headers.hostname }${ req.url}`})
+}).listen(80)
+
+// const httpsServer = https.createServer({
+//     key: fs.readFileSync(env.key),
+//     cert: fs.readFileSync(env.cert),
+// }, app).listen(443);
+

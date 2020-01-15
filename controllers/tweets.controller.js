@@ -12,10 +12,14 @@ exports.tweetList = async (req, res, next) => {
   }
 }
 
-exports.tweetNew = async (req, res, next) => {
-  const tweets = await getCurrentUserTweetsWithFollowing(req.user);
-  const user = req.user.avatar;
-  res.render('tweets/tweet-form', { tweet: {}, user, tweets, isAuthenticated: req.isAuthenticated(), currentUser: req.user });
+// exports.tweetNew = (req, res, next) => {
+//   // const tweets = await getCurrentUserTweetsWithFollowing(req.user);
+//   // const user = req.user.avatar;
+//   res.render('tweets/tweet-form', { tweet: {}, isAuthenticated: req.isAuthenticated(), currentUser: req.user });    
+// }
+
+exports.tweetNew = (req, res, next) => {
+  res.render('tweets/tweet-form', { tweet: {}, isAuthenticated: req.isAuthenticated(), currentUser: req.user });
 }
 
 exports.tweetCreate = async (req, res, next) => {
