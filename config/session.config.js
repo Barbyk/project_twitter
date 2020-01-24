@@ -4,7 +4,7 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 
 app.use(session({
-    secret:"pitch perfect never gonna get it",
+    secret:process.env.SESSION,
     resave: false, //pour ne pas save la session dans le store
     saveUninitialized: false, //pour ne pas garder save les sessions vides dans le store
     cookie: {

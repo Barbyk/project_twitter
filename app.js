@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const path = require('path');// module native nodejs
 const index = require('./routes');
 const errorHandler = require('errorhandler');
-const env = require(`./environment/${ process.env.NODE_ENV }`)  // ne fonctionne pas process.env.NODE_ENV undefined
+const env = require(`./environment/${ process.env.NODE_ENV }`)
 require('./database/index');
 
 
