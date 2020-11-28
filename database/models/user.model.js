@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
+
 const userSchema = schema({
     username: {
         type: String,
@@ -12,11 +13,15 @@ const userSchema = schema({
         email: {
             type: String,
             required: true,
-            unique: true
+            lowercase: true,
+            unique: true,
+            match: [/^[\w-\.]+@([\w-]+?\.)+[\w-]{2,3}$/, 'Entrer un email valide']
         },
         password: {
             type: String ,
-            required: true
+            required: true,
+            match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^])[A-Za-z\d@$!%*?&#^]{8,12}$/, 
+            'Le mot de passe doite être compris entre 8 et 12 caractère et doit contenir au mois 1 caractère minuscule, 1 caractère majuscule, 1 chiffre, et 1 caractère spécial.'] //tester si ça fonctionne
         }
     },
     avatar: {
