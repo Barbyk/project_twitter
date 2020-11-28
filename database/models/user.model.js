@@ -20,8 +20,8 @@ const userSchema = schema({
         password: {
             type: String ,
             required: true,
-            match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^])[A-Za-z\d@$!%*?&#^]{8,12}$/, 
-            'Le mot de passe doite être compris entre 8 et 12 caractère et doit contenir au mois 1 caractère minuscule, 1 caractère majuscule, 1 chiffre, et 1 caractère spécial.'] //tester si ça fonctionne
+            match: [/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[@$!%*?&#^]).{8,}$/, 
+            'Le mot de passe doit être compris entre 8 et 12 caractère et doit contenir au mois 1 caractère minuscule, 1 caractère majuscule, 1 chiffre, et 1 caractère spécial.']
         }
     },
     avatar: {

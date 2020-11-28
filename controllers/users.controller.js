@@ -2,6 +2,7 @@ const { createUser, findUserPerUsername, searchUsersPerUsername, addUserIdToCurr
 const { getUserTweetsFromAuthorId } = require('../queries/tweets.queries');
 const path = require('path');
 const multer = require('multer');
+const _ = require('lodash');
 
 const upload = multer({
     storage: multer.diskStorage({
@@ -58,17 +59,27 @@ exports.uploadImage = [
 
 
 exports.signupForm = (req, res, next) => {
-  res.render('users/user-form', { errors: null, isAuthenticated: req.isAuthenticated(), currentUser: req.user });
+    res.render('users/user-form', { errors: null, isAuthenticated: req.isAuthenticated(), currentUser: req.user });
 }
 
 exports.signup = async (req, res, next) => {
-  const body = req.body;
-  try {
-    const user = await createUser(body);
-    res.redirect('/');
-  } catch(e) {
-    res.render('users/user-form', { errors: [ e.message ], isAuthenticated: req.isAuthenticated(), currentUser: req.user });
-  }
+    const body = req.body;
+    try {
+        const user = await createUser(body);
+        res.redirect('/');
+    } catch(e) {
+        const errors = [];
+        const emailError = _.get(e.errors,'local.email');
+        const passwordError = _.get(e.errors,'local.password');
+        if(emailError) {
+            errors.push(emailError)
+        }  
+        if(passwordError) {
+            errors.push(passwordError)
+        }
+    //   console.log(emailError.message);
+        res.render('users/user-form', { errors, isAuthenticated: req.isAuthenticated(), currentUser: req.user });
+    }
 }
 
 // exports.followUser = async ( req, res, next) => {
