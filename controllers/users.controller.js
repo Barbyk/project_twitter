@@ -82,12 +82,6 @@ exports.signup = async (req, res, next) => {
     }
 }
 
-// exports.followUser = async ( req, res, next) => {
-//     const UserId = req.params.UserId;
-//     await addUserIdToCurrentUserFollowing(userId);
-//     const user = await findUserPerId(userId);
-//     res.redirect(`/users/${ user.username }`);
-// }
 
 exports.followUser = async ( req, res, next) => {
     try {
